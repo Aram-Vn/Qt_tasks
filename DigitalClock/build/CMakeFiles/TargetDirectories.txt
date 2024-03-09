@@ -1,0 +1,9 @@
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/DigitalClock.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/edit_cache.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/rebuild_cache.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/list_install_components.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/install.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/install/local.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/install/strip.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/DigitalClock_autogen_timestamp_deps.dir
+/home/aram/workspace/Qt_tasks/DigitalClock/build/CMakeFiles/DigitalClock_autogen.dir
