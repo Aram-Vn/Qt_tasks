@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/DigitalClock.dir/DigitalClock_autogen/mocs_compilation.cpp.o CMakeFiles/DigitalClock.dir/main.cpp.o CMakeFiles/DigitalClock.dir/mainwindow.cpp.o -o DigitalClock  /usr/lib/libQt5Widgets.so.5.15.12 /usr/lib/libQt5Gui.so.5.15.12 /usr/lib/libQt5Core.so.5.15.12 
