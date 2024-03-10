@@ -120,6 +120,7 @@ void MainWindow::toggleStopwatch()
         connect(m_timer, &QTimer::timeout, this, &MainWindow::updateStopwatch);
 
         m_stopwatchButton->setText("Stop Stopwatch");
+        m_switchButton->setEnabled(false);
         m_stopwatchButton->setStyleSheet("QPushButton {"
                             "   background-color: #FF0000;"
                             "   border: 1px solid #FF0000;"
@@ -142,11 +143,12 @@ void MainWindow::toggleStopwatch()
     else
     {
         disconnect(m_timer, &QTimer::timeout, this, &MainWindow::updateStopwatch);
+        m_switchButton->setEnabled(true);
+
         QString str = "Start Stopwatch";
-
-        str += "  " + m_digitalClock->text();
-
+        str += "\ntotal time:  " + m_digitalClock->text();
         m_stopwatchButton->setText(str);
+
         m_stopwatchButton->setStyleSheet("QPushButton {"
                             "   background-color: #4CAF50;"
                             "   border: 1px solid #4CAF50;"
