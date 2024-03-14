@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QFont>
+#include <QVBoxLayout>
 
 class MainWindow : public QMainWindow
 {
@@ -26,10 +27,11 @@ private slots:
 private:
     QLabel      *m_digitalClock;
     QTimer      *m_timer;
-    QPushButton *m_switchButton;
     QPushButton *m_stopwatchButton;
     bool        stopwatchRunning;
+    QPushButton *m_switchButton;
     bool        flag;
     QTime       m_stopwatchStartTime;
+    QVBoxLayout *mainLayout;
 };
 #endif // MAINWINDOW_H

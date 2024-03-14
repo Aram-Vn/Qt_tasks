@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <QVBoxLayout>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -53,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
                         "}");
 
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(m_digitalClock);
     mainLayout->addWidget(m_switchButton);
     mainLayout->addWidget(m_stopwatchButton);
@@ -72,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_switchButton, &QPushButton::clicked, this,  &MainWindow::toggleClock);
     connect(m_stopwatchButton, &QPushButton::clicked, this, &MainWindow::toggleStopwatch);
     connect(m_timer, &QTimer::timeout, this, &MainWindow::updateClockTwentyFor);
-
 
     m_timer->start(60);
 }
@@ -145,9 +143,15 @@ void MainWindow::toggleStopwatch()
         disconnect(m_timer, &QTimer::timeout, this, &MainWindow::updateStopwatch);
         m_switchButton->setEnabled(true);
 
-        QString str = "Start Stopwatch";
-        str += "\ntotal time:  " + m_digitalClock->text();
+        QString str = "total time:  " + m_digitalClock->text();
         m_stopwatchButton->setText(str);
+
+        QLabel* stopTime = new QLabel(str, this);
+        QFont font = stopTime->font();
+        font.setPointSize(15);
+        stopTime->setFont(font);
+        stopTime->setAlignment(Qt::AlignCenter);
+        mainLayout->insertWidget(1, stopTime);
 
         m_stopwatchButton->setStyleSheet("QPushButton {"
                             "   background-color: #4CAF50;"
