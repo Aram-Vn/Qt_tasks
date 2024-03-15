@@ -23,6 +23,8 @@ private slots:
     void toggleClock();
     void toggleStopwatch();
     void updateStopwatch();
+    void deleteStopTimeLayout();
+
 
 private:
     QLabel      *m_digitalClock;

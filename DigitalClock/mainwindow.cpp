@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QTime>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -9,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_stopwatchButton{new QPushButton("Start Stopwatch")},
     flag{true},
     stopwatchRunning{false},
-    m_stopwatchStartTime{}
+    m_stopwatchStartTime{},
+    mainLayout{new QVBoxLayout(this)}
 {
 
     m_switchButton->setStyleSheet("QPushButton {"
@@ -51,11 +53,9 @@ MainWindow::MainWindow(QWidget *parent)
                         "   color: black;"
                         "}");
 
-
-    mainLayout = new QVBoxLayout(this);
-    mainLayout->addWidget(m_digitalClock);
-    mainLayout->addWidget(m_switchButton);
-    mainLayout->addWidget(m_stopwatchButton);
+    mainLayout->addWidget(m_digitalClock, Qt::AlignCenter);
+    mainLayout->addWidget(m_switchButton, Qt::AlignCenter);
+    mainLayout->addWidget(m_stopwatchButton, Qt::AlignCenter);
 
     m_digitalClock->setAlignment(Qt::AlignCenter);
 
@@ -151,7 +151,16 @@ void MainWindow::toggleStopwatch()
         font.setPointSize(15);
         stopTime->setFont(font);
         stopTime->setAlignment(Qt::AlignCenter);
-        mainLayout->insertWidget(1, stopTime);
+
+        QPushButton* DeletestopTimeLayout = new QPushButton("Delete",this);
+        connect(DeletestopTimeLayout, &QPushButton::clicked, this, &MainWindow::deleteStopTimeLayout);
+
+        QHBoxLayout* stopTimeLayout = new QHBoxLayout(this);
+        stopTimeLayout->addWidget(stopTime);
+        stopTimeLayout->addWidget(DeletestopTimeLayout);
+        stopTimeLayout->setAlignment(DeletestopTimeLayout, Qt::AlignRight);
+
+        mainLayout->insertLayout(1, stopTimeLayout);
 
         m_stopwatchButton->setStyleSheet("QPushButton {"
                             "   background-color: #4CAF50;"
@@ -185,4 +194,43 @@ void MainWindow::updateStopwatch()
 
     m_digitalClock->setText(timeString);
 }
+
+void MainWindow::deleteStopTimeLayout()
+{
+    QPushButton *senderButton = qobject_cast<QPushButton*>(sender());
+    if (!senderButton)
+    {
+        return;
+    }
+
+    QLayout *parentLayout = nullptr;
+    for (auto item : mainLayout->children()) {
+        if (QHBoxLayout *layoutItem = qobject_cast<QHBoxLayout*>(item)) {
+            if (layoutItem->indexOf(senderButton) != -1) {
+                parentLayout = layoutItem;
+                break;
+            }
+        }
+    }
+
+    if (!parentLayout)
+    {
+        return;
+    }
+
+    mainLayout->removeItem(parentLayout);
+
+    QLayoutItem *child;
+    while ((child = parentLayout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = child->widget())
+        {
+            widget->deleteLater();
+        }
+        delete child;
+    }
+
+    delete parentLayout;
+}
+
+
 
